@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="3dp"
+        android:background="@color/colorAccent"
+        >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@color/colorPrimary">
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="350dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:id="@+id/mainImageView"
+       />
+<ImageView
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:id="@+id/playButton"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:src="@drawable/play"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativeLayoutDownload"
+    android:layout_below="@+id/mainImageView"
+    android:layout_marginTop="15dp"
+    >
+<ImageView
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+    android:src="@drawable/download"
+    android:layout_alignParentRight="true"
+    android:id="@+id/downloadID"
+    />
+</RelativeLayout>
+
+
+        
+    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
