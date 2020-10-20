@@ -1,9 +1,11 @@
 package com.ddvader44.whatsappstatusdownloader;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +24,8 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static android.media.tv.TvContract.AUTHORITY;
 
 public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusViewHolder>{
 
@@ -45,6 +50,20 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.StatusView
     final StatusModel files = (StatusModel) filesList.get(position);
     if(files.getUri().toString().endsWith(".mp4")){
         holder.playIcon.setVisibility(View.VISIBLE);
+        holder.playIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                StrictMode.setVmPolicy(builder.build());
+                File file = new File(files.getUri().toString());
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.fromFile(file), "video/*");
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                context.startActivity(intent);
+            }
+        });
     }else{
         holder.playIcon.setVisibility(View.INVISIBLE);
     }
